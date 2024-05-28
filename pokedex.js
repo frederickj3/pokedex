@@ -31,17 +31,19 @@ async function getPokemon(num){
     let pokemonName = pokemon["name"];
     let pokemonType = pokemon["types"];
     let pokemonImg = pokemon["sprites"]["front_default"];
+    let pokemonBackImg = pokemon["sprites"]["back_default"];
 
     res = await fetch(pokemon["species"]["url"]);
     let pokemonDesc = await res.json();
 
     pokemonDesc = pokemonDesc["flavor_text_entries"][9]["flavor_text"]
 
-    pokedex[num] = {"name" : pokemonName, "img" : pokemonImg, "types": pokemonType, "desc" : pokemonDesc}
+    pokedex[num] = {"name" : pokemonName, "img" : pokemonImg, "backImg" : pokemonBackImg, "types": pokemonType, "desc" : pokemonDesc}
 }
 
 function updatePokemon(){
     document.getElementById("pokemon-img").src = pokedex[this.id]["img"];
+    document.getElementById("pokemon-img-back").src = pokedex[this.id]["backImg"];
 
     let typesDiv = document.getElementById("pokemon-types");
     while (typesDiv.firstChild){
